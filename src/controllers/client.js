@@ -7,8 +7,9 @@ const router = Router();
 // List of all users
 const clients_list = async (req, res) => {
   const clients = await req.context.models.Client.find()
-    .select({ 'name': 1, '_id': 1 , 'username':1, 'email':1, 'first_name':1, 'last_name':1, 
-                'picture':1, 'isSocial':1, 'friends':1, 'likes':1, 'createdAt':1, 'user_about':1 });
+    .select({ 'name': 1, '_id': 1 , 'email': 1, 'first_name': 1, 'last_name': 1, 
+                'picture': 1, 'phone': 1, 'mobile': 1, 'address': 1, 'createdAt': 1, 
+                'notes': 1, 'active': 1, 'date_started': 1 });
 
   return res.send(clients);
 };
@@ -29,14 +30,38 @@ const client_add = async (req, res, next) => {
 };
 
 
+/* const client_add = async (req, res, next) => {
+  try {
+    const client = await req.context.models.Client.create({
+      username: req.body.username,
+      email: req.body.email,
+      first_name: req.body.first_name,
+      last_name: req.body.last_name,
+      phone: req.body.phone,
+      mobile: req.body.mobile,
+      address: req.body.address,
+      date_started:  req.body.date_started,
+      notes: req.body.notes,
+      picture: req.body.picture
+    }).catch((error) => next(new BadRequestError(error)));
+
+
+
+    return res.send(client);
+  } catch(error) {
+    res.status(500).send(error)
+  }
+}; */
+
 
 // View logged in user profile
 const client_profile = async(req, res) => {
-  res.send(req.client)
+  const client = await req.context.models.Client.findById(
+    req.params.clientId,
+  );
+  return res.send(client);
+  // res.send(req.client)
 };
-
-
-
 
 
 /* router.get('/:userId', auth, async (req, res) => {
@@ -49,18 +74,17 @@ const client_profile = async(req, res) => {
 /* Update selected user */
 const client_update = async (req, res) => {
   try {
-    const existsEmail = await Client.findOne({_id: { $ne: req.params.userId }, email: req.body.email});
+    const existsEmail = await Client.findOne({_id: { $ne: req.body._id }, email: req.body.email});
     if (existsEmail) {
       return res.status(401).send({error: 'Email allready exists'})
     }
-    const existsUsername = await Client.findOne({_id: { $ne: req.params.userId }, username: req.body.username});
+/*     const existsUsername = await Client.findOne({_id: { $ne: req.params.userId }, username: req.body.username});
     if (existsUsername) {
       return res.status(401).send({error: 'Username allready exists'})
-    } 
+    }  */
     const client = await req.context.models.Client.findByIdAndUpdate(
-      req.params.userId, 
-      { username: req.body.username,
-        email: req.body.email,
+      req.params.clientId, 
+      { email: req.body.email,
         first_name: req.body.first_name,
         last_name: req.body.last_name,
         phone: req.body.phone,

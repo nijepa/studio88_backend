@@ -8,7 +8,7 @@ const router = Router();
 
 // Client
 router.get('/', clients_list);
-router.post('/add', client_add);
+router.post('/', client_add);
 router.get('/:clientId', client_profile);
 router.put('/:clientId', client_update);
 

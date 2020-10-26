@@ -70,6 +70,6 @@ app.get('*', function (req, res, next) {
 
 connectDB().then(async () => {
   app.listen(process.env.PORT, () =>
-    console.log(`Odinbook app listening on port ${process.env.PORT}!`),
+    console.log(`Studio88 app listening on port ${process.env.PORT}!`),
   );
 });

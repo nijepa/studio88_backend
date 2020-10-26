@@ -1,13 +1,11 @@
 import mongoose from 'mongoose';
 import validator from 'validator';
-import bcrypt from 'bcrypt';
-import jwt from 'jsonwebtoken';
 
 const clientSchema = new mongoose.Schema({
-    username: {
+/*     username: {
       type: String,
       unique: true,
-    },
+    }, */
     email: {
       type: String,
       required: true,
@@ -45,6 +43,10 @@ const clientSchema = new mongoose.Schema({
     date_started: {
       type: Date
     },
+    active: {
+      type: Boolean,
+      default: true
+    }
 /*     friends: [ 
       { user: { type: mongoose.Schema.Types.ObjectId, ref: 'User'},
         status: Number,
@@ -78,10 +80,10 @@ clientSchema
 });
 
 /* If user deleted remove all user posts and comments */
-clientSchema.pre('remove', function(next) {
+/* clientSchema.pre('remove', function(next) {
   this.model('Post').deleteMany({ user: this._id }, next);
   this.model('Comment').deleteMany({ user: this._id }, next);
-});
+}); */
 
 const Client = mongoose.model('Client', clientSchema);
 
