@@ -1,21 +1,9 @@
-import mongoose from 'mongoose';
-
 import User from './user.js';
 import Post from './post.js';
 import Comment from './comment.js';
 import Client from './client.js';
+import Schedule from './schedule.js';
 
-/* const connectDb = () => {
-  return mongoose.connect(process.env.DATABASE_URL, {
-    useNewUrlParser: true,
-    useCreateIndex: true,
-    useUnifiedTopology: true,
-    useFindAndModify: false
-  });;
-}; */
-
-const models = { User, Post, Comment, Client };
-
-//export { connectDb };
+const models = { User, Post, Comment, Client, Schedule };
 
 export default models;

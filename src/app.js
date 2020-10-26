@@ -31,6 +31,7 @@ app.use(async (req, res, next) => {
 app.use('/users', routes.user);
 app.use('/posts', routes.post);
 app.use('/clients', routes.client);
+app.use('/schedules', routes.schedule);
 
 app.use((error, req, res, next) => {
   if (!error.statusCode) error.statusCode = 500;
