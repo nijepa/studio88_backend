@@ -7,10 +7,38 @@ const schedules_list = async (req, res) => {
   const schedules = await req.context.models.Schedule.find()
     .select({ 'title': 1, '_id': 1 , 'weekday': 1, 'duration': 1,  
               'startTime': 1, 'notes': 1, 'createdAt': 1, 'members': 1 })
-    .populate('client', 'first_name last_name picture mobile email');
+    .populate({path: 'members', populate: { path:'client', select: 'first_name last_name picture mobile email'}});
 
   return res.send(schedules);
 };
+
+// View selected schedule
+const schedule_selected = async(req, res) => {
+  const schedule = await req.context.models.Schedule.findById(
+    req.params.scheduleId,
+  ).populate({path: 'members', populate: { path:'client', select: 'first_name last_name picture mobile email'}});
+  return res.send(schedule);
+  // res.send(req.client)
+};
+
+// List of NOT friends for selected user 
+const not_clients = async(req, res) => {
+  try {
+    let id = req.params._id;
+    let clients = await Client.find({
+      "_id": {"$ne": id},
+      "members.client": { "$nin": id } }
+    )
+    .select({ '_id': 1, 'email': 1, 'first_name': 1, 'last_name': 1, 
+              'picture': 1, 'createdAt': 1, 'active': 1, 'mobile': 1 })
+
+    res.json({
+      clients
+    });
+  } catch (error) {
+    res.status(400).send(error);
+  }
+}
 
 // Create new schedule
 const schedule_add = async (req, res, next) => {
@@ -27,15 +55,6 @@ const schedule_add = async (req, res, next) => {
   }
 };
 
-// View selected schedule
-const schedule_selected = async(req, res) => {
-  const schedule = await req.context.models.Schedule.findById(
-    req.params.scheduleId,
-  );
-  return res.send(schedule);
-  // res.send(req.client)
-};
-
 /* Update selected schedule */
 const schedule_update = async (req, res) => {
   try {
@@ -49,7 +68,8 @@ const schedule_update = async (req, res) => {
         weekday: req.body.weekday,
         startTime: req.body.startTime,
         duration: req.body.duration,
-        notes: req.body.notes }, 
+        notes: req.body.notes,
+        members: req.body.members }, 
       function (err, docs) { 
         if (err){ 
           res.status(500).send(err)
@@ -65,7 +85,8 @@ const schedule_update = async (req, res) => {
 
 export { 
         schedules_list,
-        schedule_add, 
         schedule_selected, 
-        schedule_update
+        schedule_add,
+        schedule_update,
+        not_clients
 };

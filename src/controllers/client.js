@@ -9,7 +9,8 @@ const clients_list = async (req, res) => {
   const clients = await req.context.models.Client.find()
     .select({ 'name': 1, '_id': 1 , 'email': 1, 'first_name': 1, 'last_name': 1, 
                 'picture': 1, 'phone': 1, 'mobile': 1, 'address': 1, 'createdAt': 1, 
-                'notes': 1, 'active': 1, 'date_started': 1 });
+                'notes': 1, 'active': 1, 'date_started': 1 })
+    .sort([['last_name', 1]]);
 
   return res.send(clients);
 };
