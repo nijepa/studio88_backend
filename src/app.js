@@ -32,6 +32,7 @@ app.use('/users', routes.user);
 app.use('/posts', routes.post);
 app.use('/clients', routes.client);
 app.use('/schedules', routes.schedule);
+app.use('/payments', routes.payment);
 
 app.use((error, req, res, next) => {
   if (!error.statusCode) error.statusCode = 500;

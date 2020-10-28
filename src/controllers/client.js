@@ -93,7 +93,8 @@ const client_update = async (req, res) => {
         address: req.body.address,
         date_started:  req.body.date_started,
         notes: req.body.notes,
-        picture: req.body.picture }, 
+        picture: req.body.picture,
+        active: req.body.active }, 
       function (err, docs) { 
         if (err){ 
           res.status(500).send(err)

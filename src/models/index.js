@@ -3,7 +3,13 @@ import Post from './post.js';
 import Comment from './comment.js';
 import Client from './client.js';
 import Schedule from './schedule.js';
+import Payment from './payment.js';
 
-const models = { User, Post, Comment, Client, Schedule };
+const models = { User, 
+                  Post, 
+                  Comment, 
+                  Client, 
+                  Schedule, 
+                  Payment };
 
 export default models;
