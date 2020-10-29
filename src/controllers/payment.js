@@ -5,8 +5,14 @@ import Router from 'express';
 // List of all payments
 const payments_list = async (req, res) => {
   const payments = await req.context.models.Payment.find()
-    .select({ 'payment_period': 1, '_id': 1 , 'price': 1, 'notes': 1, 'createdAt': 1, 'members': 1 })
-    .populate({path: 'members', populate: { path:'client', select: 'first_name last_name picture mobile email'}});
+    .select({ 'payment_year': 1, 
+              'payment_month': 1, 
+              '_id': 1 , 
+              'price': 1, 
+              'notes': 1, 
+              'createdAt': 1, 
+              'members': 1 })
+    .populate({path: 'members', populate: { path:'client', select: 'first_name last_name picture mobile email active'}});
 
   return res.send(payments);
 };
@@ -15,7 +21,7 @@ const payments_list = async (req, res) => {
 const payment_selected = async(req, res) => {
   const payment = await req.context.models.Payment.findById(
     req.params.paymentId,
-  ).populate({path: 'members', populate: { path:'client', select: 'first_name last_name picture mobile email'}});
+  ).populate({path: 'members', populate: { path:'client', select: 'first_name last_name picture mobile email active'}});
   return res.send(payment);
   // res.send(req.client)
 };
@@ -23,7 +29,7 @@ const payment_selected = async(req, res) => {
 // Create new payment
 const payment_add = async (req, res, next) => {
   try {
-    const exists = await Payment.findOne({title: req.body.payment_period});
+    const exists = await Payment.findOne({payment_year: req.body.payment_year, payment_month: req.body.payment_month});
     if (exists) {
       return res.status(401).send({error: 'Period allready exists'})
     }
@@ -38,13 +44,14 @@ const payment_add = async (req, res, next) => {
 /* Update selected payment */
 const payment_update = async (req, res) => {
   try {
-    const existsEmail = await Payment.findOne({_id: { $ne: req.body._id }, title: req.body.payment_period});
+    const existsEmail = await Payment.findOne({_id: { $ne: req.body._id }, payment_year: req.body.payment_year, payment_month: req.body.payment_month});
     if (existsEmail) {
       return res.status(401).send({error: 'Period allready exists'})
     }
     const payment = await req.context.models.Payment.findByIdAndUpdate(
       req.params.paymentId, 
-      { payment_period: req.body.payment_period,
+      { payment_year: req.body.payment_year,
+        payment_month: req.body.payment_month,
         price: req.body.price,
         notes: req.body.notes,
         members: req.body.members }, 

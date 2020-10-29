@@ -1,9 +1,13 @@
 import mongoose from 'mongoose';
 
 const paymentSchema = new mongoose.Schema({
-    payment_period: {
+    payment_year: {
+      type: Number,
+      required: true
+    },
+    payment_month: {
       type: String,
-      unique: true,
+      required: true,
     },
     price: {
       type: Number,
@@ -16,7 +20,8 @@ const paymentSchema = new mongoose.Schema({
     members: [ 
       { client: { type: mongoose.Schema.Types.ObjectId, ref: 'Client'},
       payment_date: Date,
-      payment_amount: Number
+      payment_amount: Number,
+      note: String
       } 
     ], 
   },
