@@ -4,12 +4,14 @@ import Comment from './comment.js';
 import Client from './client.js';
 import Schedule from './schedule.js';
 import Payment from './payment.js';
+import Attendance from './attendance.js';
 
 const models = { User, 
                   Post, 
                   Comment, 
                   Client, 
                   Schedule, 
-                  Payment };
+                  Payment,
+                  Attendance };
 
 export default models;
