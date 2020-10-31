@@ -12,7 +12,8 @@ const payments_list = async (req, res) => {
               'notes': 1, 
               'createdAt': 1, 
               'members': 1 })
-    .populate({path: 'members', populate: { path:'client', select: 'first_name last_name picture mobile email active'}});
+    .populate({path: 'members', populate: { path:'client', select: 'first_name last_name picture mobile email active'}})
+    .sort([['createdAt', -1]]);
 
   return res.send(payments);
 };
@@ -68,9 +69,22 @@ const payment_update = async (req, res) => {
   }
 }; 
 
+/* Delete selected payment */
+const payment_delete = async (req, res) => {
+  const payment = await req.context.models.Payment.findById(
+    req.params.paymentId,
+  );
+
+  if (payment) {
+    await payment.remove();
+  }
+  return res.send(payment);
+};
+
 export { 
         payments_list,
         payment_selected, 
         payment_add,
-        payment_update
+        payment_update,
+        payment_delete
 };

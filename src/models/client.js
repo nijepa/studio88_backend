@@ -37,6 +37,12 @@ const clientSchema = new mongoose.Schema({
     mobile: {
       type: String
     },
+    instagram: {
+      type: String
+    },
+    facebook: {
+      type: String
+    },
     address: {
       type: String
     },

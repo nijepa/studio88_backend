@@ -31,23 +31,24 @@ const user_signup = async (req, res, next) => {
 
 // Login registered user
 const user_login = async(req, res) => {
-  const existsEmail = await User.findOne({email: req.body.email});
+/*   const existsEmail = await User.findOne({email: req.body.email});
   if (!existsEmail) {
     try {
-      const user = new User(req.body)
+/*       const user = new User(req.body)
       await user.save();
-      const token = await user.generateAuthToken();
-      return res.status(201).send({ user, token });
+      const token = await user.generateAuthToken(); */
+      //return res.status(201).send({ user, token });
+    /*  return res.status(401).send({error: 'Login failed! Check authentication credentials'});
     } catch (error) {
       return res.status(400).send(error)
     }
-  }
+  } */
   try {
-    if (existsEmail.isSocial === true) {
+/*     if (existsEmail.isSocial === true) {
       const user = existsEmail;
       const token = await user.generateAuthToken()
       return res.send({ user, token })
-    }
+    } */
     const { email, password } = req.body;
     const user = await User.findByCredentials(email, password);
     if (!user) {

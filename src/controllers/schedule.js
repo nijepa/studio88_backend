@@ -83,10 +83,23 @@ const schedule_update = async (req, res) => {
   }
 }; 
 
+/* Delete selected schedule */
+const schedule_delete = async (req, res) => {
+  const schedule = await req.context.models.Schedule.findById(
+    req.params.scheduleId,
+  );
+
+  if (schedule) {
+    await schedule.remove();
+  }
+  return res.send(schedule);
+};
+
 export { 
         schedules_list,
         schedule_selected, 
         schedule_add,
         schedule_update,
+        schedule_delete,
         not_clients
 };

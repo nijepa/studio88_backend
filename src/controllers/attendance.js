@@ -6,8 +6,8 @@ import Router from 'express';
 const attendances_list = async (req, res) => {
   const attendances = await req.context.models.Attendance.find()
     .select({ '_id': 1 , 'attend_date': 1, 'notes': 1, 'createdAt': 1, 'members': 1 })
-    .populate({path: 'members', populate: { path:'client', select: 'first_name last_name picture mobile email'}});
-
+    .populate({path: 'members', populate: { path:'client', select: 'first_name last_name picture mobile email'}})
+    .sort([['attend_date', -1]]);
   return res.send(attendances);
 };
 
@@ -60,9 +60,22 @@ const attendance_update = async (req, res) => {
   }
 }; 
 
+/* Delete selected attendance */
+const attendance_delete = async (req, res) => {
+  const attendance = await req.context.models.Attendance.findById(
+    req.params.attendanceId,
+  );
+
+  if (attendance) {
+    await attendance.remove();
+  }
+  return res.send(attendance);
+};
+
 export { 
         attendances_list,
         attendance_selected, 
         attendance_add,
-        attendance_update
+        attendance_update,
+        attendance_delete
 };
