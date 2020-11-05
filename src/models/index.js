@@ -5,6 +5,7 @@ import Client from './client.js';
 import Schedule from './schedule.js';
 import Payment from './payment.js';
 import Attendance from './attendance.js';
+import Expense from './expense.js';
 
 const models = { User, 
                   Post, 
@@ -12,6 +13,7 @@ const models = { User,
                   Client, 
                   Schedule, 
                   Payment,
-                  Attendance };
+                  Attendance,
+                  Expense };
 
 export default models;
