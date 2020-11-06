@@ -11,7 +11,7 @@ const expenses_list = async (req, res) => {
               'expense_title': 1,
               'notes': 1, 
               'createdAt': 1 })
-    .sort([['createdAt', -1]]);
+    .sort([['expense_date', -1]]);
 
   return res.send(expenses);
 };
