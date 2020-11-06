@@ -14,7 +14,7 @@ const payments_list = async (req, res) => {
               'createdAt': 1, 
               'members': 1 })
     .populate({path: 'members', populate: { path:'client', select: 'first_name last_name picture mobile email active'}})
-    .sort([['createdAt', -1]]);
+    .sort([['payment_date', -1]]);
 
   return res.send(payments);
 };
