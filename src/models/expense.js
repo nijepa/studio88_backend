@@ -4,7 +4,15 @@ const expenseSchema = new mongoose.Schema({
     expense_title: {
       type: String,
       required: true
-    },  
+    }, 
+    expense_year: {
+      type: Number,
+      required: true
+    },
+    expense_month: {
+      type: String,
+      required: true,
+    }, 
     expense_date: {
       type: Date,
       required: true

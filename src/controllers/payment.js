@@ -7,6 +7,7 @@ const payments_list = async (req, res) => {
   const payments = await req.context.models.Payment.find()
     .select({ 'payment_year': 1, 
               'payment_month': 1, 
+              'payment_date': 1,
               '_id': 1 , 
               'price': 1, 
               'notes': 1, 

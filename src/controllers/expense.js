@@ -5,7 +5,9 @@ import Router from 'express';
 // List of all expenses
 const expenses_list = async (req, res) => {
   const expenses = await req.context.models.Expense.find()
-    .select({ 'expense_date': 1, 
+    .select({ 'expense_date': 1,
+              'expense_year' : 1,
+              'expense_month': 1,
               '_id': 1 , 
               'expense_amount': 1, 
               'expense_title': 1,
