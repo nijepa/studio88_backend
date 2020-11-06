@@ -42,7 +42,9 @@ const expense_update = async (req, res) => {
   try {
     const expense = await req.context.models.Expense.findByIdAndUpdate(
       req.params.expenseId, 
-      { expense_date: req.body.payment_date,
+      { expense_year: req.body.expense_year,
+        expense_month: req.body.expense_month,
+        expense_date: req.body.expense_date,
         expense_title: req.body.expense_title,
         expense_amount: req.body.expense_amount,
         notes: req.body.notes }, 

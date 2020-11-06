@@ -54,6 +54,7 @@ const payment_update = async (req, res) => {
       req.params.paymentId, 
       { payment_year: req.body.payment_year,
         payment_month: req.body.payment_month,
+        payment_date: req.body.payment_date,
         price: req.body.price,
         notes: req.body.notes,
         members: req.body.members }, 
