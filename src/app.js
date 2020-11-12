@@ -35,6 +35,7 @@ app.use('/schedules', routes.schedule);
 app.use('/payments', routes.payment);
 app.use('/attendances', routes.attendance);
 app.use('/expenses', routes.expense);
+app.use('/generals', routes.general);
 
 app.use((error, req, res, next) => {
   if (!error.statusCode) error.statusCode = 500;

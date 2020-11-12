@@ -5,6 +5,7 @@ import schedule from './schedule.js';
 import payment from './payment.js';
 import attendance from './attendance.js';
 import expense from './expense.js';
+import general from './general.js';
 
 export default {
   user,
@@ -13,5 +14,6 @@ export default {
   schedule,
   payment,
   attendance,
-  expense
+  expense,
+  general
 };
