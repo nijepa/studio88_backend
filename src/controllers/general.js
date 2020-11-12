@@ -87,6 +87,5 @@ export {
         general_selected, 
         general_add,
         general_update,
-        general_delete,
-        general_price_add
+        general_delete
 };
