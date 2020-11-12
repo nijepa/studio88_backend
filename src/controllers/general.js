@@ -65,7 +65,7 @@ const general_update = async (req, res) => {
         else{ 
           return res.send(docs);
         } 
-    });
+      })
   } catch(error) {
     res.status(500).send(error)
   }
