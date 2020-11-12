@@ -9,7 +9,7 @@
     "node": "14.4.0"
   },
   "scripts": {
-    "start": "node src/app.js",
+    "start": "node src/app.js --trace-warnings",
     "test": "ss"
   },
   "repository": {
