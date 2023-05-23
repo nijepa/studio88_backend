@@ -5,12 +5,8 @@
   "author": "Nikola Pavicevic",
   "main": "app.js",
   "type": "module",
-  "engines": {
-    "node": "14.4.0"
-  },
   "scripts": {
-    "start": "node src/app.js --trace-warnings",
-    "test": "ss"
+    "start": "node src/app.js ",
   },
   "repository": {
     "type": "git",
@@ -21,21 +17,21 @@
   ],
   "license": "ISC",
   "dependencies": {
-    "bcrypt": "^5.0.0",
+    "bcrypt": "^5.1.0",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
-    "express": "^4.17.1",
-    "jsonwebtoken": "^8.5.1",
-    "mongoose": "^5.10.10",
-    "passport": "^0.4.1",
-    "passport-jwt": "^4.0.0",
+    "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.0",
+    "mongoose": "^7.2.0",
+    "passport": "^0.6.0",
+    "passport-jwt": "^4.0.1",
     "passport-local": "^1.0.0",
-    "validator": "^13.1.17"
+    "validator": "^13.9.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.12.3",
-    "@babel/node": "^7.12.1",
-    "@babel/preset-env": "^7.12.1",
-    "nodemon": "^2.0.6"
+    "@babel/core": "^7.21.8",
+    "@babel/node": "^7.20.7",
+    "@babel/preset-env": "^7.21.5",
+    "nodemon": "^2.0.22"
   }
 }
